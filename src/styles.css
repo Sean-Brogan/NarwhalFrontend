@@ -1,1 +1,218 @@
-/* You can add global styles to this file, and also import other style files */
+/*
+  BEGINNING OF THE FIRST PORTION OF STYLESHEET
+*/
+@font-face {
+  font-family: "Lane";
+  src: url("fonts/LANENAR_.ttf");
+}
+
+@font-face {
+  font-family: "Lemon";
+  src: url("fonts/LemonMilk.otf");
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Lane", Arial;
+  background: #ffffff;
+}
+
+a, a:visited {
+  color: #0074D9;
+  text-decoration: none;
+  -o-transition: .65s;
+  -ms-transition: .65s;
+  -moz-transition: .65s;
+  -webkit-transition: .65s;
+  transition: .65s;
+}
+
+a:hover {
+  color: #FF4136;
+  text-decoration: none;
+}
+
+/* BEGIN Logo Nav */
+
+div.head {
+  display: inline-block;
+  float: left;
+  padding-top: 10px;
+  padding-bottom: 0;
+  height: 40px;
+  width: 100%;
+  margin: 0;
+  font-family: "Lemon", Arial;
+  font-size: 25px;
+  text-align: center;
+  color: #F3F4E5;
+}
+  div.head a {
+    text-decoration: none;
+    color: #F3F4E5;
+  }
+
+    div.head a:after {
+      content: '';
+      display: block;
+      margin: auto;
+      height: 2px;
+      width: 0px;
+      background: transparent;
+      transition: width .5s ease, background-color .5s ease;
+      color: #F3F4E5;
+    }
+
+    div.head a:hover:after {
+      width: 320px;
+      background: #F3F4E5;
+    }
+
+/* END Logo Nav */
+
+/* BEGIN Navigation bar */
+div.nav {
+  width: 100%;
+  height: 20px;
+  color: #0074D9;
+  margin: 0;
+  padding-bottom: 3px;
+  text-align: center;
+  list-style: none;
+  font-size: 18px;
+  font-family: "Lane", Arial;
+  font-weight: bolder;
+  display: inline-block;
+  position: relative;
+}
+
+  div.nav a, a:visited {
+    padding: 5px;
+    color: #E2E3D9;
+    text-decoration: none;
+    -o-transition: .65s;
+    -ms-transition: .65s;
+    -moz-transition: .65s;
+    -webkit-transition: .65s;
+    transition: .65s;
+  }
+
+  div.nav a:hover {
+    color: #B29B82;
+    text-decoration: none;
+  }
+
+  div.nav a.current {
+    color: #B29B82;
+    padding-bottom: 0;
+  }
+
+/* END Navigation Bar */
+
+/* BEGIN CSS Grid Formulation */
+
+.wrapper {
+  width: 100%;
+  margin: 0 auto;
+  background-color: #ffffff;
+}
+
+  .wrapper > div {
+    padding: 2px;
+    color: black;
+  }
+
+  .wrapper {
+    display: grid;
+    margin-top: 15px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 0;
+    grid-auto-rows: minmax(100px, auto);
+  }
+
+    .wrapper .infoRecordsLeft {
+      grid-column: 1/2;
+      grid-row: 1;
+      padding: 0 10px;
+      text-align: justify;
+      background-color: white;
+      color: #59554E;
+    }
+
+
+      .wrapper .infoRecordsLeft h1 {
+        text-transform: capitalize;
+        padding: 0;
+        margin: 20px auto;
+      }
+
+      .wrapper .infoRecordsRight p {
+        padding: 0;
+        margin: 25px auto;
+      }
+
+    .wrapper .infoRecordsRight {
+      grid-column: 2/6;
+      grid-row: 1;
+      padding: 0 10px;
+      text-align: justify;
+      background-color: white;
+      color: #59554E;
+    }
+
+    .wrapper .tableRecords {
+      grid-column: 1/4;
+      grid-row: 2;
+      padding: 0;
+    }
+
+      .wrapper .tableRecords table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 10px;
+      }
+
+        .wrapper .tableRecords table th, td {
+          text-align: left;
+          padding: 10px;
+        }
+
+        .wrapper .tableRecords tr {
+          background: #ffffff;
+          color: #59554E;
+          border-bottom: 1px solid #59554E;
+        }
+
+          .wrapper .tableRecords tr {
+            -o-transition: .65s;
+            -ms-transition: .65s;
+            -moz-transition: .65s;
+            -webkit-transition: .65s;
+            transition: .65s;
+          }
+
+          .wrapper .tableRecords tr:hover {
+            background: #E2E3D9;
+          }
+
+        .wrapper .tableRecords th {
+          color: #59554E;
+          padding: 8px;
+          background: #ffffff;
+          font-size: 17px;
+          text-align: left;
+          border-bottom: 2px solid #59554E;
+        }
+
+
+
+/* END CSS Grid Formulation */
+
+/* Body div to create bg color of navBar */
+div.body {
+  background: #59554E;
+  height: 100%;
+}
+
+
