@@ -13,14 +13,8 @@ import { Component } from '@angular/core';
           </div>
         </div>
       </div>
-
-      <!-- credits -->
-      <div class="text-center">
-        <p>
-          <a href="https://www.thenarwhalproject.com/" target="_top">The Narwhal Project</a>
-        </p>
-      </div>
     `
 })
 
-export class AppComponent { }
+export class AppComponent {
+}
