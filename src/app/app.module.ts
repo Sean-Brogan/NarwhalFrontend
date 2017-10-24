@@ -8,7 +8,6 @@ import { PatientsComponent }    from './patients/patients.component';
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { LoginComponent}          from './login/login.component';
 import { AppRoutingModule }     from './app-routing.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AlertComponent }         from './alert/alert.component';
 import { AuthGuard }              from './authentication/authentication.guard';
@@ -23,7 +22,6 @@ import {AccountsComponent} from "./accounts/accounts.component";
     FormsModule,
     AppRoutingModule,
     HttpModule,
-    NgbModule.forRoot(),
   ],
   declarations: [
     AppComponent,
