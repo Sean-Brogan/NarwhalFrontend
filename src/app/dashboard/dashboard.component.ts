@@ -6,7 +6,6 @@ import { JsonpModule } from '@angular/http';
 
 import { User } from '../models/user';
 import { UserService } from '../user/user.service';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     moduleId: module.id,
@@ -111,10 +110,3 @@ export class DashboardComponent implements OnInit {
         this.userService.getAll().subscribe(users => { this.users = users; });
     }*/
 }
-
-@NgModule({
-  imports: [BrowserModule, FormsModule, ReactiveFormsModule, JsonpModule, NgbModule.forRoot()],
-  declarations: [DashboardComponent],
-  bootstrap: [DashboardComponent]
-})
-export class DashboardModule {}
