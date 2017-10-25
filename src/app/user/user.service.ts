@@ -29,7 +29,7 @@ export class UserService {
         .map(this.extractData)
         .catch(this.handleError);
     }
-
+    
     // private helper methods
 
     private jwt() {
