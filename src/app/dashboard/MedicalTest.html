@@ -1,6 +1,7 @@
-<h1 mat-dialog-title>Diagnosis: {{data.record.diagnosis}}</h1>
+<h1 mat-dialog-title>Medical Test: {{data.record.testName}}</h1>
       <div>
-        <p>Diagnosis Details: {{data.record.diagnosisDetails}}</p>
+        <p>Record Id: {{data.record.recordId}}</p>
+        <p>Test Result: {{data.record.testResult}}</p>
       </div>
       <div mat-dialog-actions>
         <button mat-button (click)="onNoClick()" tabindex=-1>Close</button>
