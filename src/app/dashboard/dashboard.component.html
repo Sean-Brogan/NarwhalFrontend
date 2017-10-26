@@ -1,0 +1,44 @@
+<div class="body">
+        <div class="head">
+          
+          <a class="logo" routerLink="/dashboard" routerLinkActive="active">The Narwhal Project</a>
+        </div>
+          <div class="nav">
+            <a class="current" routerLink="/dashboard" routerLinkActive="active">Records</a>
+          <a class="nav" routerLink="/patients" routerLinkActive="active">Patients</a>
+          <a class="nav" routerLink="/accounts" routerLinkActive="active">Account</a>
+          <a class="nav" [routerLink]="['/login']">Logout</a>
+        </div>
+ 
+        <div class="wrapper">
+          <div class="infoRecordsLeft">
+            <h1>
+              Hello, {{currentUser.firstname}}!
+            </h1>
+          </div>
+          <div class="infoRecordsRight">
+            <p>
+              Welcome to the <i>Narwhal Project</i>. Below are your most recently modified or added medical records.
+            </p>
+          </div>
+          <div class="tableRecords">
+            <table>
+              <tr>
+                <th>PatientId</th>
+                <th>DoctorId</th>
+                <th>RecordTypeId</th>
+                <th>RecordDate</th>
+              </tr>
+              <tr *ngFor="let index of yourRecords" (click)="openRecord(index.recordId, index.recordTypeId)">
+                <td>{{ index.patientId }}</td>
+                <td>{{ index.doctorId }}</td>
+                <td>{{ index.recordTypeId }}</td>
+                <td>{{ index.recordDate }}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      
+      <router-outlet></router-outlet>
