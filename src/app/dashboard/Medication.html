@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Medication: {{data.record.medicationName}}</h1>
+      <div>
+        <p>Record Id: {{data.record.recordId}}</p>
+        <p>Frequency: {{data.record.frequency}}</p>
+        <p>Dosage: {{data.record.dosage}}</p>
+        <p>Delivery Method: {{data.record.deliveryMethod}}</p>
+        <p>Expiration Date: {{data.record.experationDate}}</p>
+      </div>
+      <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()" tabindex=-1>Close</button>
+      </div>

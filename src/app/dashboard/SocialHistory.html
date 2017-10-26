@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Social History: </h1>
+      <div>
+        <p>Record Id: {{data.record.recordId}}</p>
+        <p>Smokes?: {{data.record.smokes}}</p>
+        <p>Smoking Amount: {{data.record.amountSmokes}}</p>
+        <p>Drinks?: {{data.record.drinks}}</p>
+        <p>Drinkng Amount: {{data.record.amountDrinks}}</p>
+      </div>
+      <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()" tabindex=-1>Close</button>
+      </div>

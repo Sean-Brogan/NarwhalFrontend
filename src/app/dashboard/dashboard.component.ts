@@ -6,64 +6,51 @@ import { JsonpModule } from '@angular/http';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { User } from '../models/user';
-import { recordIndex } from '../models/recordIndex';
-import { UserService } from '../user/user.service';
+import { recordIndex }   from '../models/recordIndex';
+import { diagnosis }     from '../models/diagnosis';
+import { immunization }  from '../models/immunization';
+import { medicalTest }   from '../models/medicalTest';
+import { medication }    from '../models/medication';
+import { socialHistory } from '../models/socialHistory';
+import { surgery }       from '../models/surgery';
+import { UserService }   from '../user/user.service';
 import { MedicalRecordsService } from '../medicalRecords/medicalRecord.service';
 
 @Component({
     moduleId: module.id,
-    template:`
-      <div class="body">
-        <div class="head">
-          
-          <a class="logo" routerLink="/dashboard" routerLinkActive="active">The Narwhal Project</a>
-        </div>
-          <div class="nav">
-            <a class="current" routerLink="/dashboard" routerLinkActive="active">Records</a>
-          <a class="nav" routerLink="/patients" routerLinkActive="active">Patients</a>
-          <a class="nav" routerLink="/accounts" routerLinkActive="active">Account</a>
-          <a class="nav" [routerLink]="['/login']">Logout</a>
-        </div>
- 
-        <div class="wrapper">
-          <div class="infoRecordsLeft">
-            <h1>
-              Hello, {{currentUser.firstname}}!
-            </h1>
-          </div>
-          <div class="infoRecordsRight">
-            <p>
-              Welcome to the <i>Narwhal Project</i>. Below are your most recently modified or added medical records.
-            </p>
-          </div>
-          <div class="tableRecords">
-            <table>
-              <tr>
-                <th>PatientId</th>
-                <th>DoctorId</th>
-                <th>RecordTypeId</th>
-                <th>RecordDate</th>
-              </tr>
-              <tr *ngFor="let index of yourRecords" (click)="openRecord()">
-                <td>{{ index.patientId }}</td>
-                <td>{{ index.doctorId }}</td>
-                <td>{{ index.recordTypeId }}</td>
-                <td>{{ index.recordDate }}</td>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      
-      <router-outlet></router-outlet>
-    `
+    selector: 'dashboard',
+    templateUrl: 'dashboard.component.html'
 })
 
 export class DashboardComponent implements OnInit {
     currentUser: User;
     users: User[] = [];
     yourRecords: recordIndex[];
+    currentDiagnosis: diagnosis;
+    currentImmunization: immunization;
+    currentMedicalTest: medicalTest;
+    currentMedication: medication;
+    currentSocialHistory: socialHistory;
+    currentSurgery: surgery;
+    settings = {
+      columns: {
+        recordId: {
+          title: 'Record Id'
+        },
+        patientName: {
+          title: 'Patient Name'
+        },
+        doctorName: {
+          title: 'Doctor Name'
+        },
+        recordType: {
+          title: 'Record Type'
+        },
+        recordDate: {
+            title: 'Date'
+        }
+      }
+    };
 
     constructor(
       private userService: UserService,
@@ -80,35 +67,237 @@ export class DashboardComponent implements OnInit {
                 data => {});
     }
     
-    openRecord(): void {
-        let dialogRef = this.dialog.open(DialogDiagnosis, {
-            width: '250px',
-            data: {user: this.currentUser}
-        });
-
-        dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
-        });
+    openRecord(recordId: number, recordTypeId: number): void {
+        if(recordTypeId == 1){
+            this.UpdateDiagnosis(recordId)
+        }
+        else if(recordTypeId == 2){
+            this.UpdateImmunization(recordId);            
+        }
+        else if(recordTypeId == 3){
+            this.UpdateMedicalTest(recordId);            
+        }
+        else if(recordTypeId == 4){
+            this.UpdateMedication(recordId);            
+        }
+        else if(recordTypeId == 5){
+            this.UpdateSocialHistory(recordId);            
+        }
+        else if(recordTypeId == 6){
+            this.UpdateSurgery(recordId);
+        }
     }
+    
+    UpdateDiagnosis(recordId: number){
+        let promise = new Promise((resolve, reject) => {
+            this.medicalRecordsService.getDiagnosis(recordId)
+                .toPromise().then(
+                    res => {
+                        this.LoadDiagnosis();
+                        resolve();
+                    }
+                );
+        })
+        return promise;
+    }
+    
+    LoadDiagnosis(){
+        this.currentDiagnosis = JSON.parse(localStorage.getItem('currentRecord'));
+            let dialogRef = this.dialog.open(DialogDiagnosis, {
+            width: '500px',
+            data: {user: this.currentUser, record: this.currentDiagnosis}
+            });
+    }
+    
+    UpdateImmunization(recordId: number){
+        let promise = new Promise((resolve, reject) => {
+            this.medicalRecordsService.getImmunization(recordId)
+                .toPromise().then(
+                    res => {
+                        this.LoadImmunization();
+                        resolve();
+                    }
+                );
+        })
+        return promise;
+    }
+    
+    LoadImmunization(){
+        this.currentImmunization = JSON.parse(localStorage.getItem('currentRecord'));
+            let dialogRef = this.dialog.open(DialogImmunization, {
+            width: '500px',
+            data: {user: this.currentUser, record: this.currentImmunization}
+            });
+    }
+    
+    UpdateMedicalTest(recordId: number){
+        let promise = new Promise((resolve, reject) => {
+            this.medicalRecordsService.getMedicalTest(recordId)
+                .toPromise().then(
+                    res => {
+                        this.LoadMedicalTest();
+                        resolve();
+                    }
+                );
+        })
+        return promise;
+    }
+    
+    LoadMedicalTest(){
+        this.currentMedicalTest = JSON.parse(localStorage.getItem('currentRecord'));
+            let dialogRef = this.dialog.open(DialogMedicalTest, {
+            width: '500px',
+            data: {user: this.currentUser, record: this.currentMedicalTest}
+            });
+    }
+    
+    UpdateMedication(recordId: number){
+        let promise = new Promise((resolve, reject) => {
+            this.medicalRecordsService.getMedication(recordId)
+                .toPromise().then(
+                    res => {
+                        this.LoadMedication();
+                        resolve();
+                    }
+                );
+        })
+        return promise;
+    }
+    
+    LoadMedication(){
+        this.currentMedication = JSON.parse(localStorage.getItem('currentRecord'));
+            let dialogRef = this.dialog.open(DialogMedication, {
+            width: '500px',
+            data: {user: this.currentUser, record: this.currentMedication}
+            });
+    }
+    
+    UpdateSocialHistory(recordId: number){
+        let promise = new Promise((resolve, reject) => {
+            this.medicalRecordsService.getSocialHistory(recordId)
+                .toPromise().then(
+                    res => {
+                        this.LoadSocialHistory();
+                        resolve();
+                    }
+                );
+        })
+        return promise;
+    }
+    
+    LoadSocialHistory(){
+        this.currentSocialHistory = JSON.parse(localStorage.getItem('currentRecord'));
+            let dialogRef = this.dialog.open(DialogSocialHistory, {
+            width: '500px',
+            data: {user: this.currentUser, record: this.currentSocialHistory}
+            });
+    }
+    
+    UpdateSurgery(recordId: number){
+        let promise = new Promise((resolve, reject) => {
+            this.medicalRecordsService.getSurgery(recordId)
+                .toPromise().then(
+                    res => {
+                        this.LoadSurgery();
+                        resolve();
+                    }
+                );
+        })
+        return promise;
+    }
+    
+    LoadSurgery(){
+        this.currentSurgery = JSON.parse(localStorage.getItem('currentRecord'));
+            let dialogRef = this.dialog.open(DialogSurgery, {
+            width: '500px',
+            data: {user: this.currentUser, record: this.currentSurgery}
+            });
+    }    
 }
 
 @Component({
     moduleId: module.id,
-    template:`
-      <h1 mat-dialog-title>Hi {{data.user.firstname}}</h1>
-      <div>
-        <p>I'm showing you text</p>
-      </div>
-      <div mat-dialog-actions>
-        <button mat-button>Ok</button>
-        <button mat-button (click)="onNoClick()">No Thanks</button>
-      </div>
-    `
+    templateUrl: 'Diagnosis.html'
 })
 
 export class DialogDiagnosis {
     constructor(
         public dialogRef: MatDialogRef<DialogDiagnosis>,
+        @Inject(MAT_DIALOG_DATA) public data: any) { }
+        
+        onNoClick(): void {
+            this.dialogRef.close();
+        }
+}
+
+@Component({
+    moduleId: module.id,
+    templateUrl: 'Immunization.html'
+})
+
+export class DialogImmunization {
+    constructor(
+        public dialogRef: MatDialogRef<DialogImmunization>,
+        @Inject(MAT_DIALOG_DATA) public data: any) { }
+        
+        onNoClick(): void {
+            this.dialogRef.close();
+        }
+}
+
+@Component({
+    moduleId: module.id,
+    templateUrl: 'MedicalTest.html'
+})
+
+export class DialogMedicalTest {
+    constructor(
+        public dialogRef: MatDialogRef<DialogMedicalTest>,
+        @Inject(MAT_DIALOG_DATA) public data: any) { }
+        
+        onNoClick(): void {
+            this.dialogRef.close();
+        }
+}
+
+@Component({
+    moduleId: module.id,
+    templateUrl: 'Medication.html'
+})
+
+export class DialogMedication {
+    constructor(
+        public dialogRef: MatDialogRef<DialogMedication>,
+        @Inject(MAT_DIALOG_DATA) public data: any) { }
+        
+        onNoClick(): void {
+            this.dialogRef.close();
+        }
+}
+
+@Component({
+    moduleId: module.id,
+    templateUrl: 'SocialHistory.html'
+})
+
+export class DialogSocialHistory {
+    constructor(
+        public dialogRef: MatDialogRef<DialogSocialHistory>,
+        @Inject(MAT_DIALOG_DATA) public data: any) { }
+        
+        onNoClick(): void {
+            this.dialogRef.close();
+        }
+}
+
+@Component({
+    moduleId: module.id,
+    templateUrl: 'Surgery.html'
+})
+
+export class DialogSurgery {
+    constructor(
+        public dialogRef: MatDialogRef<DialogSurgery>,
         @Inject(MAT_DIALOG_DATA) public data: any) { }
         
         onNoClick(): void {
