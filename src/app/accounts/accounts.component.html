@@ -1,0 +1,19 @@
+<div class="body">
+      <div class="head">
+        <a class="logo" routerLink="/dashboard" routerLinkActive="active">The Narwhal Project</a>
+      </div>
+      <div class="nav">
+        <a class="nav" routerLink="/dashboard" routerLinkActive="active">Records</a>
+        <a class="nav" routerLink="/patients" routerLinkActive="active">Patients</a>
+        <a class="current" routerLink="/accounts" routerLinkActive="active">Account</a>
+        <a class="nav" [routerLink]="['/login']">Logout</a>
+      </div>
+
+      <div class="wrapper">
+        <p>This is the account page where you can adjust account information.</p>
+      
+        
+        
+      </div>
+    </div>
+      <router-outlet></router-outlet>

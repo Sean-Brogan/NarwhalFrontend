@@ -24,10 +24,10 @@
           <div class="tableRecords">
             <table>
               <tr>
-                <th>PatientId</th>
-                <th>DoctorId</th>
-                <th>RecordTypeId</th>
-                <th>RecordDate</th>
+                <th>Patient Id</th>
+                <th>Doctor Id</th>
+                <th>Record Type Id</th>
+                <th>Record Date</th>
               </tr>
               <tr *ngFor="let index of yourRecords" (click)="openRecord(index.recordId, index.recordTypeId)">
                 <td>{{ index.patientId }}</td>
