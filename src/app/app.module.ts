@@ -4,7 +4,7 @@ import { FormsModule }    from '@angular/forms';
 import { HttpModule }     from '@angular/http';
 import { MatDialogModule }from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Ng2SmartTableModule }     from 'ng2-smart-table';
+import { Ng2TableModule } from 'ng2-table/ng2-table';
 
 import { AppComponent }           from './app.component';
 import { PatientsComponent }      from './patients/patients.component';
@@ -35,7 +35,7 @@ import { MedicalRecordsService }  from './medicalRecords/medicalRecord.service';
     HttpModule,
     MatDialogModule,
     BrowserAnimationsModule,
-    Ng2SmartTableModule,
+    Ng2TableModule,
   ],
   declarations: [
     AppComponent,

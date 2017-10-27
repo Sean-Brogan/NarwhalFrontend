@@ -25,14 +25,18 @@
             <table>
               <tr>
                 <th>Patient Id</th>
+                <th>Patient Name</th>
                 <th>Doctor Id</th>
-                <th>Record Type Id</th>
+                <th>Doctor Name</th>
+                <th>Record Type</th>
                 <th>Record Date</th>
               </tr>
               <tr *ngFor="let index of yourRecords" (click)="openRecord(index.recordId, index.recordTypeId)">
                 <td>{{ index.patientId }}</td>
+                <td>{{ index.patientName }}</td>
                 <td>{{ index.doctorId }}</td>
-                <td>{{ index.recordTypeId }}</td>
+                <td>{{ index.doctorName }}</td>
+                <td>{{ index.recordType }}</td>
                 <td>{{ index.recordDate }}</td>
               </tr>
             </table>
