@@ -2,9 +2,8 @@ import { NgModule }       from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { FormsModule }    from '@angular/forms';
 import { HttpModule }     from '@angular/http';
-import { MatDialogModule }from '@angular/material';
+import { MatDialogModule, MatMenuModule }from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Ng2TableModule } from 'ng2-table/ng2-table';
 
 import { AppComponent }           from './app.component';
 import { PatientsComponent }      from './patients/patients.component';
@@ -17,6 +16,7 @@ import { DialogMedicalTest }      from './dashboard/dashboard.component'
 import { DialogMedication }       from './dashboard/dashboard.component'
 import { DialogSocialHistory }    from './dashboard/dashboard.component'
 import { DialogSurgery }          from './dashboard/dashboard.component'
+import { DialogAddDiagnosis }     from './dashboard/dashboard.component'
 
 import { AlertComponent }         from './alert/alert.component';
 import { AuthGuard }              from './authentication/authentication.guard';
@@ -27,7 +27,7 @@ import { AccountsComponent }      from "./accounts/accounts.component";
 import { MedicalRecordsService }  from './medicalRecords/medicalRecord.service';
 
 
-@NgModule({
+@NgModule({ 
   imports: [
     BrowserModule,
     FormsModule,
@@ -35,7 +35,7 @@ import { MedicalRecordsService }  from './medicalRecords/medicalRecord.service';
     HttpModule,
     MatDialogModule,
     BrowserAnimationsModule,
-    Ng2TableModule,
+    MatMenuModule,
   ],
   declarations: [
     AppComponent,
@@ -50,6 +50,7 @@ import { MedicalRecordsService }  from './medicalRecords/medicalRecord.service';
     DialogMedication,
     DialogSocialHistory,
     DialogSurgery,
+    DialogAddDiagnosis,
   ],
   providers: [
     UserService,
@@ -64,6 +65,7 @@ import { MedicalRecordsService }  from './medicalRecords/medicalRecord.service';
                      DialogMedicalTest, 
                      DialogMedication, 
                      DialogSocialHistory,
-                     DialogSurgery, ]
+                     DialogSurgery,
+                     DialogAddDiagnosis, ]
 })
 export class AppModule { }

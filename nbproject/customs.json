@@ -1,0 +1,9 @@
+{
+    "elements": {
+        "ng4-menu-item": {},
+        "ng4-dropdown": {},
+        "ng4-dropdown-button": {},
+        "ng4-dropdown-menu": {}
+    },
+    "attributes": {}
+}
