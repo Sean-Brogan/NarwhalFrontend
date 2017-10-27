@@ -1,8 +1,9 @@
 <h1 mat-dialog-title>Diagnosis: <input matInput [(ngModel)]="data.record.diagnosis"></h1>
 <div mat-dialog-content>
-  <p>Diagnosis Details: </p>
   <mat-form-field>
-    <input matInput tabindex="1" [(ngModel)]="data.record.diagnosisDetails">
+    <p>Patient Id: </p><input matInput tabindex="1" [(ngModel)]="data.recordIndex.patientId">
+    <p>Doctor Id </p><input matInput tabindex="1" [(ngModel)]="data.recordIndex.doctorId">
+    <p>Diagnosis Details: </p><input matInput tabindex="1" [(ngModel)]="data.record.diagnosisDetails">
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
