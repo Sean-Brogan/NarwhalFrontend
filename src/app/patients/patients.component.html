@@ -1,0 +1,16 @@
+<div class="body">
+      <div class="head">
+        <a class="logo" routerLink="/dashboard" routerLinkActive="active">The Narwhal Project</a>
+      </div>
+      <div class="nav">
+        <a class="nav" routerLink="/dashboard" routerLinkActive="active">Records</a>
+        <a class="current" routerLink="/patients" routerLinkActive="active">Patients</a>
+        <a class="nav" routerLink="/accounts" routerLinkActive="active">Account</a>
+        <a class="nav" [routerLink]="['/login']">Logout</a>
+      </div>
+      <div class="wrapper">
+      <p>This is the patients page where you can manage and add new patients</p>
+      <p>Add a Record</p>
+    </div>
+    </div>
+    <router-outlet></router-outlet>
