@@ -5,7 +5,7 @@ export class User {
     firstName: string;
     lastName: string;
     isAlive: boolean;
-    DateOfBirth: number;
+    dateOfBirth: number;
     ssn: number;
     dod: number;
     permissionLevel: number;
