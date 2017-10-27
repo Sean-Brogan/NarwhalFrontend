@@ -20,14 +20,14 @@ export class UserService {
          .catch(this.handleError);
     }
 
-    getUserById(userId: string): Observable<User> {
-      let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
-      let cpParams = new URLSearchParams();
-      cpParams.set('id', userId);
-      let options = new RequestOptions({ headers: cpHeaders, params: cpParams });
-      return this.http.get(this.userUrl, options)
-        .map(this.extractData)
-        .catch(this.handleError);
+    getUserById(userId: string) {
+        return this.http.get('http://localhost:8080/user?id=' + userId)
+            .map(response => {
+                let user = response.json();
+                if (user) {
+                    localStorage.setItem('tempUser', JSON.stringify(user));
+                }
+            });
     }
     
     // private helper methods

@@ -3,10 +3,15 @@ import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { HttpParams, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import { recordIndex }   from '../models/recordIndex';
+import { UserService }   from '../user/user.service';
+import { User } from '../models/user';
 
 @Injectable()
 export class MedicalRecordsService {
-    constructor(private http: Http) { }
+    constructor(
+        private http: Http,
+        private userService: UserService,) { }
  
     yourRecords(userId: number){
         return this.http.get('http://localhost:8080/all-medicalrecords?id=' + userId)
@@ -16,6 +21,57 @@ export class MedicalRecordsService {
                     localStorage.setItem('yourRecordIndexes', JSON.stringify(recordIndexes));
                 }
         });
+    }
+    
+    mapRecordIndexes(yourRecords: any[]){
+        for (var x = 0; x < yourRecords.length; x++) {
+            this.getPatientName(yourRecords[x]);
+            this.getDoctorName(yourRecords[x]);
+            if (yourRecords[x].recordTypeId == 1){
+                yourRecords[x].recordType = 'Diagnosis';
+            }
+            else if (yourRecords[x].recordTypeId == 2){
+                yourRecords[x].recordType = 'Immunization'
+            }
+            else if (yourRecords[x].recordTypeId == 3){
+                yourRecords[x].recordType = 'Medical Test'
+            }
+            else if (yourRecords[x].recordTypeId == 4){
+                yourRecords[x].recordType = 'Medication'
+            }
+            else if (yourRecords[x].recordTypeId == 5){
+                yourRecords[x].recordType = 'Social History'
+            }
+            else if (yourRecords[x].recordTypeId == 6){
+                yourRecords[x].recordType = 'Surgery'
+            }
+        }
+    }
+    
+    getPatientName(record: any){
+        let promise = new Promise((resolve, reject) => {
+                this.userService.getUserById(record.patientId.toString())
+                .toPromise().then(
+                    res => {
+                        let tempUser = JSON.parse(localStorage.getItem('tempUser'));
+                        record.patientName = `${tempUser.firstname} ${tempUser.lastname}`;
+                        resolve();
+                    })
+        });
+        return promise;
+    }
+    
+    getDoctorName(record: any){
+        let promise = new Promise((resolve, reject) => {
+                this.userService.getUserById(record.doctorId.toString())
+                .toPromise().then(
+                    res => {
+                        let tempUser = JSON.parse(localStorage.getItem('tempUser'));
+                        record.doctorName = `${tempUser.firstname} ${tempUser.lastname}`;
+                        resolve();
+                    })
+        })
+        return promise;
     }
 
     getDiagnosis(recordId: number) {

@@ -13,7 +13,6 @@ import { medicalTest }   from '../models/medicalTest';
 import { medication }    from '../models/medication';
 import { socialHistory } from '../models/socialHistory';
 import { surgery }       from '../models/surgery';
-import { UserService }   from '../user/user.service';
 import { MedicalRecordsService } from '../medicalRecords/medicalRecord.service';
 
 @Component({
@@ -32,28 +31,8 @@ export class DashboardComponent implements OnInit {
     currentMedication: medication;
     currentSocialHistory: socialHistory;
     currentSurgery: surgery;
-    settings = {
-      columns: {
-        recordId: {
-          title: 'Record Id'
-        },
-        patientName: {
-          title: 'Patient Name'
-        },
-        doctorName: {
-          title: 'Doctor Name'
-        },
-        recordType: {
-          title: 'Record Type'
-        },
-        recordDate: {
-            title: 'Date'
-        }
-      }
-    };
-
+    
     constructor(
-      private userService: UserService,
       private medicalRecordsService: MedicalRecordsService,
       public dialog: MatDialog){
         this.currentUser = JSON.parse(localStorage.getItem('currentUser')); 
@@ -65,6 +44,7 @@ export class DashboardComponent implements OnInit {
         this.medicalRecordsService.yourRecords(this.currentUser.userId)
             .subscribe(
                 data => {});
+        this.medicalRecordsService.mapRecordIndexes(this.yourRecords);
     }
     
     openRecord(recordId: number, recordTypeId: number): void {
