@@ -3,8 +3,8 @@
           
           <a class="logo" routerLink="/dashboard" routerLinkActive="active">The Narwhal Project</a>
         </div>
-          <div class="nav">
-            <a class="current" routerLink="/dashboard" routerLinkActive="active">Records</a>
+        <div class="nav">
+          <a class="current" routerLink="/dashboard" routerLinkActive="active">Records</a>
           <a class="nav" routerLink="/patients" routerLinkActive="active">Patients</a>
           <a class="nav" routerLink="/accounts" routerLinkActive="active">Account</a>
           <a class="nav" [routerLink]="['/login']">Logout</a>
@@ -15,7 +15,29 @@
             <h1>
               Hello, {{currentUser.firstname}}!
             </h1>
-            <button [hidden]="!permissionDoctor">Add Record</button>
+            <button mat-icon-button [matMenuTriggerFor]="menu" [hidden]="!permissionDoctor">
+              <mat-icon>Add Record</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="addRecord(1)">
+                <mat-icon>Diagnosis</mat-icon>
+              </button>
+              <button mat-menu-item (click)="addRecord(2)">
+                <mat-icon>Immunization</mat-icon>
+              </button>
+              <button mat-menu-item (click)="addRecord(3)">
+                <mat-icon>Medical Test</mat-icon>
+              </button>
+              <button mat-menu-item (click)="addRecord(4)">
+                <mat-icon>Medication</mat-icon>
+              </button>
+              <button mat-menu-item (click)="addRecord(5)">
+                <mat-icon>Social History</mat-icon>
+              </button>
+              <button mat-menu-item (click)="addRecord(6)">
+                <mat-icon>Surgery</mat-icon>
+              </button>
+            </mat-menu>
           </div>
           <div class="infoRecordsRight">
             <p>

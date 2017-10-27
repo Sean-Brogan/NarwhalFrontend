@@ -121,4 +121,27 @@ export class MedicalRecordsService {
                 localStorage.setItem('currentRecord', JSON.stringify(surgery));
         })
     }
+    
+    addRecordIndex(record: recordIndex){
+        return this.http.post('http://localhost:8080/medicalRecord', record)
+            .map(res => {
+                let recordId = res.json();
+                if (recordId) {
+                    localStorage.setItem('newId', JSON.stringify(recordId));
+                }
+        })
+    }
+    
+    addDiagnosis(record: any, recordIndex: recordIndex) {
+        let promise = new Promise((resolve, reject) => {
+                this.addRecordIndex(recordIndex)
+                .toPromise().then(
+                    res => {
+                        record.recordId = JSON.parse(localStorage.getItem('newId'));
+                        this.http.post('http://localhost:8080/diagnosis',record)
+                        resolve();
+                    })
+        })
+        return promise;
+    }
 }

@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JsonpModule } from '@angular/http';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; 
 
 import { User } from '../models/user';
 import { recordIndex }   from '../models/recordIndex';
@@ -49,6 +50,42 @@ export class DashboardComponent implements OnInit {
         if (this.currentUser.permissionLevel == 2){
             this.permissionDoctor = true;
         }
+    }
+    
+    addRecord(recordTypeId: number){
+        if(recordTypeId == 1){
+            this.addDiagnosis();
+        }
+        else if(recordTypeId == 2){
+            
+        }
+        else if(recordTypeId == 3){
+            
+        }
+        else if(recordTypeId == 4){
+            
+        }
+        else if(recordTypeId == 5){
+            
+        }
+        else if(recordTypeId == 6){
+            
+        }
+    }
+    
+    addDiagnosis(){
+        let newDiagnosis: diagnosis;
+        let newRecordIndex: recordIndex;
+        newRecordIndex.recordTypeId = 1;
+        newRecordIndex.recordDate = new Date().getTime();
+        let dialogRef = this.dialog.open(DialogAddDiagnosis, {
+            width: '500px',
+            data: {record: newDiagnosis, recordIndex: newRecordIndex}
+        });
+        
+        dialogRef.afterClosed().subscribe(result => {
+            this.medicalRecordsService.addDiagnosis(result, newRecordIndex);
+    });
     }
     
     openRecord(recordId: number, recordTypeId: number): void {
@@ -282,6 +319,21 @@ export class DialogSocialHistory {
 export class DialogSurgery {
     constructor(
         public dialogRef: MatDialogRef<DialogSurgery>,
+        @Inject(MAT_DIALOG_DATA) public data: any) { }
+        
+        onNoClick(): void {
+            this.dialogRef.close();
+        }
+}
+
+@Component({
+    moduleId: module.id,
+    templateUrl: 'AddDiagnosis.html'
+})
+
+export class DialogAddDiagnosis {
+    constructor(
+        public dialogRef: MatDialogRef<DialogAddDiagnosis>,
         @Inject(MAT_DIALOG_DATA) public data: any) { }
         
         onNoClick(): void {
