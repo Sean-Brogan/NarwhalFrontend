@@ -31,6 +31,7 @@ export class DashboardComponent implements OnInit {
     currentMedication: medication;
     currentSocialHistory: socialHistory;
     currentSurgery: surgery;
+    permissionDoctor: boolean;
     
     constructor(
       private medicalRecordsService: MedicalRecordsService,
@@ -45,6 +46,9 @@ export class DashboardComponent implements OnInit {
             .subscribe(
                 data => {});
         this.medicalRecordsService.mapRecordIndexes(this.yourRecords);
+        if (this.currentUser.permissionLevel == 2){
+            this.permissionDoctor = true;
+        }
     }
     
     openRecord(recordId: number, recordTypeId: number): void {
