@@ -34,6 +34,85 @@ a:hover {
   text-decoration: none;
 }
 
+/* BEGIN LOGIN PAGE */
+
+div.logoIMG {
+  margin: 0;
+  padding: 0;
+  display: block;
+  text-align: center;
+  font-family: "Lane", Arial;
+}
+
+  .logoIMG img {
+    height: auto;
+    width: 400px;
+    display: block;
+    margin: auto;
+  }
+
+  .logoIMG h1 {
+    font-size: 35px;
+    color: #59554E;
+    font-family: "Lemon", Arial;
+    height: auto;
+    width: 360px;
+    display: block;
+    margin: auto;
+    padding: 0;
+  }
+
+  .logoIMG input[type=text], select {
+    width: 360px;
+    padding: 12px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #59554E;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 20px;
+    font-family: "Lane", Arial;
+  }
+
+  .logoIMG input[type=password], select {
+    width: 360px;
+    padding: 12px;
+    margin: 10px 0;
+    display: inline-block;
+    border: 1px solid #59554E;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 20px;
+    font-family: "Lane", Arial;
+  }
+
+  .logoIMG button {
+    background-color: #A1C1BE;
+    color: #F3F4E5;
+    padding: 12px;
+    margin-top: 4px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    border-bottom: 3px solid #8ba8a5;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 4px;
+    font-size: 20px;
+    font-family: "Lane", Arial;
+    width: 200px;
+  }
+
+
+div.bodyLogin {
+  background: #F3F4E5;
+  height: 100%;
+  border-bottom: 4px solid #E2E3D9;
+}
+
+/* END LOGIN PAGE */
+
 /* BEGIN Logo Nav */
 
 div.head {
@@ -118,6 +197,8 @@ div.nav {
   margin: 0 auto;
   background-color: #ffffff;
 }
+
+  /* BEGIN CSS Grid For Dashboard */
 
   .wrapper > div {
     padding: 2px;
@@ -206,7 +287,7 @@ div.nav {
           border-bottom: 2px solid #59554E;
         }
 
-
+  /* END CSS Grid for Dashboard */
 
 /* END CSS Grid Formulation */
 
