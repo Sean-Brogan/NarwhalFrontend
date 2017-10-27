@@ -15,6 +15,7 @@
             <h1>
               Hello, {{currentUser.firstname}}!
             </h1>
+            <button [hidden]="!permissionDoctor">Add Record</button>
           </div>
           <div class="infoRecordsRight">
             <p>
