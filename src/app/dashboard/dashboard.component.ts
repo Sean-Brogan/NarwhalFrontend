@@ -1,4 +1,4 @@
-import { Component, OnInit, NgModule, Inject } from '@angular/core';
+import { Component, OnInit, NgModule, Inject, Compiler  } from '@angular/core';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -35,6 +35,7 @@ export class DashboardComponent implements OnInit {
     permissionDoctor: boolean;
     
     constructor(
+    private compiler: Compiler,
       private medicalRecordsService: MedicalRecordsService,
       public dialog: MatDialog){
         this.currentUser = JSON.parse(localStorage.getItem('currentUser')); 
@@ -43,9 +44,7 @@ export class DashboardComponent implements OnInit {
       
 
     ngOnInit() {
-        this.medicalRecordsService.yourRecords(this.currentUser.userId)
-            .subscribe(
-                data => {});
+        this.compiler.clearCache();
         this.medicalRecordsService.mapRecordIndexes(this.yourRecords);
         if (this.currentUser.permissionLevel == 2){
             this.permissionDoctor = true;
@@ -74,8 +73,8 @@ export class DashboardComponent implements OnInit {
     }
     
     addDiagnosis(){
-        let newDiagnosis: diagnosis;
-        let newRecordIndex: recordIndex;
+        let newDiagnosis = new diagnosis();
+        let newRecordIndex = new recordIndex();
         newRecordIndex.recordTypeId = 1;
         newRecordIndex.recordDate = new Date().getTime();
         let dialogRef = this.dialog.open(DialogAddDiagnosis, {
