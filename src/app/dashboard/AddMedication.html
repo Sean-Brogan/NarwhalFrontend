@@ -1,16 +1,15 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<h1 mat-dialog-title>Medication Name: <input matInput [(ngModel)]="data.record.medicationName"></h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <p>Patient Id: </p><input matInput tabindex="1" [(ngModel)]="data.recordIndex.patientId">
+    <p>Doctor Id </p><input matInput tabindex="1" [(ngModel)]="data.recordIndex.doctorId">
+    <p>Frequency: </p><input matInput tabindex="1" [(ngModel)]="data.record.frequency">
+    <p>Dosage: </p><input matInput tabindex="1" [(ngModel)]="data.record.dosage">
+    <p>Delivery Method: </p><input matInput tabindex="1" [(ngModel)]="data.record.deliveryMethod">
+    <p>Expiration Date: </p><input matInput tabindex="1" [(ngModel)]="data.record.experationDate">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="data.record" tabindex="2">Save New Record</button>
+  <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+</div>

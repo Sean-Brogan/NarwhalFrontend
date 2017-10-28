@@ -3,7 +3,7 @@ import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { HttpParams, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { recordIndex }   from '../models/recordIndex';
+import { recordIndexDb }   from '../models/recordIndexDb';
 import { UserService }   from '../user/user.service';
 import { User } from '../models/user';
 
@@ -122,8 +122,15 @@ export class MedicalRecordsService {
         })
     }
     
-    addRecordIndex(record: recordIndex){
-        return this.http.post('http://localhost:8080/medicalRecord', record)
+    addRecordIndex(record: recordIndexDb){
+        record.patientId = +record.patientId;
+        record.doctorId = +record.doctorId;
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+        });
+        let options = new RequestOptions({ headers: headers });
+        let body = JSON.stringify(record);
+        return this.http.post('http://localhost:8080/medicalRecord', body, options)
             .map(res => {
                 let recordId = res.json();
                 if (recordId) {
@@ -132,13 +139,138 @@ export class MedicalRecordsService {
         })
     }
     
-    addDiagnosis(record: any, recordIndex: recordIndex) {
+    createDiagnosis(record: any){
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+        });
+        let options = new RequestOptions({ headers: headers });
+        let body = JSON.stringify(record);
+        return this.http.post('http://localhost:8080/diagnosis', body, options)
+            .map(res => {}).subscribe(res => {});
+    }
+    
+    addDiagnosis(record: any, recordIndex: recordIndexDb) {
         let promise = new Promise((resolve, reject) => {
                 this.addRecordIndex(recordIndex)
                 .toPromise().then(
                     res => {
-                        record.recordId = JSON.parse(localStorage.getItem('newId'));
-                        this.http.post('http://localhost:8080/diagnosis',record)
+                        record.recordId = +JSON.parse(localStorage.getItem('newId'));
+                        this.createDiagnosis(record);
+                        resolve();
+                    })
+        })
+        return promise;
+    }
+    
+    createImmunization(record: any){
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+        });
+        let options = new RequestOptions({ headers: headers });
+        let body = JSON.stringify(record);
+        return this.http.post('http://localhost:8080/immunization', body, options)
+            .map(res => {}).subscribe(res => {});
+    }
+    
+    addImmunization(record: any, recordIndex: recordIndexDb) {
+        let promise = new Promise((resolve, reject) => {
+                this.addRecordIndex(recordIndex)
+                .toPromise().then(
+                    res => {
+                        record.recordId = +JSON.parse(localStorage.getItem('newId'));
+                        this.createImmunization(record);
+                        resolve();
+                    })
+        })
+        return promise;
+    }
+    
+    createMedicalTest(record: any){
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+        });
+        let options = new RequestOptions({ headers: headers });
+        let body = JSON.stringify(record);
+        return this.http.post('http://localhost:8080/medicalTest', body, options)
+            .map(res => {}).subscribe(res => {});
+    }
+    
+    addMedicalTest(record: any, recordIndex: recordIndexDb) {
+        let promise = new Promise((resolve, reject) => {
+                this.addRecordIndex(recordIndex)
+                .toPromise().then(
+                    res => {
+                        record.recordId = +JSON.parse(localStorage.getItem('newId'));
+                        this.createMedicalTest(record);
+                        resolve();
+                    })
+        })
+        return promise;
+    }
+    
+    createMedication(record: any){
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+        });
+        let options = new RequestOptions({ headers: headers });
+        let body = JSON.stringify(record);
+        return this.http.post('http://localhost:8080/medication', body, options)
+            .map(res => {}).subscribe(res => {});
+    }
+    
+    addMedication(record: any, recordIndex: recordIndexDb) {
+        let promise = new Promise((resolve, reject) => {
+                this.addRecordIndex(recordIndex)
+                .toPromise().then(
+                    res => {
+                        record.recordId = +JSON.parse(localStorage.getItem('newId'));
+                        this.createMedication(record);
+                        resolve();
+                    })
+        })
+        return promise;
+    }
+    
+    createSocialHistory(record: any){
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+        });
+        let options = new RequestOptions({ headers: headers });
+        let body = JSON.stringify(record);
+        return this.http.post('http://localhost:8080/socialHistory', body, options)
+            .map(res => {}).subscribe(res => {});
+    }
+    
+    addSocialHistory(record: any, recordIndex: recordIndexDb) {
+        let promise = new Promise((resolve, reject) => {
+                this.addRecordIndex(recordIndex)
+                .toPromise().then(
+                    res => {
+                        record.recordId = +JSON.parse(localStorage.getItem('newId'));
+                        this.createSocialHistory(record);
+                        resolve();
+                    })
+        })
+        return promise;
+    }
+    
+    createSurgery(record: any){
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+        });
+        let options = new RequestOptions({ headers: headers });
+        let body = JSON.stringify(record);
+        return this.http.post('http://localhost:8080/surgery', body, options)
+            .map(res => {}).subscribe(res => {});
+    }
+    
+    addSurgery(record: any, recordIndex: recordIndexDb) {
+        let promise = new Promise((resolve, reject) => {
+                this.addRecordIndex(recordIndex)
+                .toPromise().then(
+                    res => {
+                        record.recordId = +JSON.parse(localStorage.getItem('newId'));
+                        this.createSurgery(record);
                         resolve();
                     })
         })

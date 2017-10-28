@@ -17,6 +17,11 @@ import { DialogMedication }       from './dashboard/dashboard.component'
 import { DialogSocialHistory }    from './dashboard/dashboard.component'
 import { DialogSurgery }          from './dashboard/dashboard.component'
 import { DialogAddDiagnosis }     from './dashboard/dashboard.component'
+import { DialogAddImmunization }  from './dashboard/dashboard.component'
+import { DialogAddMedicalTest }   from './dashboard/dashboard.component'
+import { DialogAddMedication }    from './dashboard/dashboard.component'
+import { DialogAddSocialHistory } from './dashboard/dashboard.component'
+import { DialogAddSurgery }       from './dashboard/dashboard.component'
 
 import { AlertComponent }         from './alert/alert.component';
 import { AuthGuard }              from './authentication/authentication.guard';
@@ -51,6 +56,11 @@ import { MedicalRecordsService }  from './medicalRecords/medicalRecord.service';
     DialogSocialHistory,
     DialogSurgery,
     DialogAddDiagnosis,
+    DialogAddImmunization,
+    DialogAddMedicalTest,
+    DialogAddMedication,
+    DialogAddSocialHistory,
+    DialogAddSurgery
   ],
   providers: [
     UserService,
@@ -66,6 +76,11 @@ import { MedicalRecordsService }  from './medicalRecords/medicalRecord.service';
                      DialogMedication, 
                      DialogSocialHistory,
                      DialogSurgery,
-                     DialogAddDiagnosis, ]
+                     DialogAddDiagnosis,
+                     DialogAddImmunization,
+                     DialogAddMedicalTest,
+                     DialogAddMedication, 
+                     DialogAddSocialHistory,
+                     DialogAddSurgery, ]
 })
 export class AppModule { }
