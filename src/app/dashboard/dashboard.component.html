@@ -1,6 +1,6 @@
 <div class="body">
         <div class="head">
-          
+
           <a class="logo" routerLink="/dashboard" routerLinkActive="active">The Narwhal Project</a>
         </div>
         <div class="nav">
@@ -9,7 +9,7 @@
           <a class="nav" routerLink="/accounts" routerLinkActive="active">Account</a>
           <a class="nav" [routerLink]="['/login']">Logout</a>
         </div>
- 
+
         <div class="wrapper">
           <div class="infoRecordsLeft">
             <h1>
@@ -60,12 +60,12 @@
                 <td>{{ index.doctorId }}</td>
                 <td>{{ index.doctorName }}</td>
                 <td>{{ index.recordType }}</td>
-                <td>{{ index.recordDate }}</td>
+                <td>{{ index.recordDate | date:'short' }}</td>
               </tr>
             </table>
           </div>
         </div>
       </div>
 
-      
+
       <router-outlet></router-outlet>
