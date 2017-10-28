@@ -57,19 +57,19 @@ export class DashboardComponent implements OnInit {
             this.addDiagnosis();
         }
         else if(recordTypeId == 2){
-            
+            this.addImmunization();
         }
         else if(recordTypeId == 3){
-            
+            this.addMedicalTest();
         }
         else if(recordTypeId == 4){
-            
+            this.addMedication();
         }
         else if(recordTypeId == 5){
-            
+            this.addSocialHistory();
         }
         else if(recordTypeId == 6){
-            
+            this.addSurgery();
         }
     }
     
@@ -85,7 +85,82 @@ export class DashboardComponent implements OnInit {
         
         dialogRef.afterClosed().subscribe(result => {
             this.medicalRecordsService.addDiagnosis(result, newRecordIndex);
-    });
+        });
+    }
+    
+    addImmunization(){
+        let newImmunization = new immunization();
+        let newRecordIndex = new recordIndexDb();
+        newRecordIndex.recordTypeId = 2;
+        newRecordIndex.recordDate = new Date().getTime();
+        let dialogRef = this.dialog.open(DialogAddImmunization, {
+            width: '500px',
+            data: {record: newImmunization, recordIndex: newRecordIndex}
+        });
+        
+        dialogRef.afterClosed().subscribe(result => {
+            this.medicalRecordsService.addImmunization(result, newRecordIndex);
+        });
+    }
+    
+    addMedicalTest(){
+        let newMedicalTest = new medicalTest();
+        let newRecordIndex = new recordIndexDb();
+        newRecordIndex.recordTypeId = 3;
+        newRecordIndex.recordDate = new Date().getTime();
+        let dialogRef = this.dialog.open(DialogAddMedicalTest, {
+            width: '500px',
+            data: {record: newMedicalTest, recordIndex: newRecordIndex}
+        });
+        
+        dialogRef.afterClosed().subscribe(result => {
+            this.medicalRecordsService.addMedicalTest(result, newRecordIndex);
+        });
+    }
+    
+    addMedication(){
+        let newMedication = new medication();
+        let newRecordIndex = new recordIndexDb();
+        newRecordIndex.recordTypeId = 4;
+        newRecordIndex.recordDate = new Date().getTime();
+        let dialogRef = this.dialog.open(DialogAddMedication, {
+            width: '500px',
+            data: {record: newMedication, recordIndex: newRecordIndex}
+        });
+        
+        dialogRef.afterClosed().subscribe(result => {
+            this.medicalRecordsService.addMedication(result, newRecordIndex);
+        });
+    }
+    
+    addSocialHistory(){
+        let newSocialHistory = new socialHistory();
+        let newRecordIndex = new recordIndexDb();
+        newRecordIndex.recordTypeId = 5;
+        newRecordIndex.recordDate = new Date().getTime();
+        let dialogRef = this.dialog.open(DialogAddSocialHistory, {
+            width: '500px',
+            data: {record: newSocialHistory, recordIndex: newRecordIndex}
+        });
+        
+        dialogRef.afterClosed().subscribe(result => {
+            this.medicalRecordsService.addSocialHistory(result, newRecordIndex);
+        });
+    }
+    
+    addSurgery(){
+        let newSurgery = new surgery();
+        let newRecordIndex = new recordIndexDb();
+        newRecordIndex.recordTypeId = 6;
+        newRecordIndex.recordDate = new Date().getTime();
+        let dialogRef = this.dialog.open(DialogAddSurgery, {
+            width: '500px',
+            data: {record: newSurgery, recordIndex: newRecordIndex}
+        });
+        
+        dialogRef.afterClosed().subscribe(result => {
+            this.medicalRecordsService.addSurgery(result, newRecordIndex);
+        });
     }
     
     openRecord(recordId: number, recordTypeId: number): void {
@@ -332,6 +407,81 @@ export class DialogSurgery {
 })
 
 export class DialogAddDiagnosis {
+    constructor(
+        public dialogRef: MatDialogRef<DialogAddDiagnosis>,
+        @Inject(MAT_DIALOG_DATA) public data: any) { }
+        
+        onNoClick(): void {
+            this.dialogRef.close();
+        }
+}
+
+@Component({
+    moduleId: module.id,
+    templateUrl: 'AddImmunization.html'
+})
+
+export class DialogAddImmunization {
+    constructor(
+        public dialogRef: MatDialogRef<DialogAddDiagnosis>,
+        @Inject(MAT_DIALOG_DATA) public data: any) { }
+        
+        onNoClick(): void {
+            this.dialogRef.close();
+        }
+}
+
+@Component({
+    moduleId: module.id,
+    templateUrl: 'AddMedicalTest.html'
+})
+
+export class DialogAddMedicalTest {
+    constructor(
+        public dialogRef: MatDialogRef<DialogAddDiagnosis>,
+        @Inject(MAT_DIALOG_DATA) public data: any) { }
+        
+        onNoClick(): void {
+            this.dialogRef.close();
+        }
+}
+
+@Component({
+    moduleId: module.id,
+    templateUrl: 'AddMedication.html'
+})
+
+export class DialogAddMedication {
+    constructor(
+        public dialogRef: MatDialogRef<DialogAddDiagnosis>,
+        @Inject(MAT_DIALOG_DATA) public data: any) { }
+        
+        onNoClick(): void {
+            this.dialogRef.close();
+        }
+}
+
+@Component({
+    moduleId: module.id,
+    templateUrl: 'AddSocialHistory.html'
+})
+
+export class DialogAddSocialHistory {
+    constructor(
+        public dialogRef: MatDialogRef<DialogAddDiagnosis>,
+        @Inject(MAT_DIALOG_DATA) public data: any) { }
+        
+        onNoClick(): void {
+            this.dialogRef.close();
+        }
+}
+
+@Component({
+    moduleId: module.id,
+    templateUrl: 'AddSurgery.html'
+})
+
+export class DialogAddSurgery {
     constructor(
         public dialogRef: MatDialogRef<DialogAddDiagnosis>,
         @Inject(MAT_DIALOG_DATA) public data: any) { }
