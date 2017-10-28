@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { User } from '../models/user';
 import { recordIndex }   from '../models/recordIndex';
+import { recordIndexDb }   from '../models/recordIndexDb';
 import { diagnosis }     from '../models/diagnosis';
 import { immunization }  from '../models/immunization';
 import { medicalTest }   from '../models/medicalTest';
@@ -74,7 +75,7 @@ export class DashboardComponent implements OnInit {
     
     addDiagnosis(){
         let newDiagnosis = new diagnosis();
-        let newRecordIndex = new recordIndex();
+        let newRecordIndex = new recordIndexDb();
         newRecordIndex.recordTypeId = 1;
         newRecordIndex.recordDate = new Date().getTime();
         let dialogRef = this.dialog.open(DialogAddDiagnosis, {
