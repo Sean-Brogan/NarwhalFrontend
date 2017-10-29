@@ -3,6 +3,11 @@
 /*
   BEGINNING OF THE FIRST PORTION OF STYLESHEET
 */
+
+button:focus {
+  outline:0;
+}
+
 @font-face {
   font-family: "Lane";
   src: url("fonts/LANENAR_.ttf");
@@ -189,6 +194,14 @@ div.nav {
     padding-bottom: 0;
   }
 
+  div.nav a.first {
+    padding-left: 0;
+  }
+
+  div.nav a.first.current {
+    padding-left: 0;
+  }
+
 /* END Navigation Bar */
 
 /* BEGIN CSS Grid Formulation */
@@ -196,7 +209,9 @@ div.nav {
 .wrapper {
   width: 100%;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: #F3F4E5;
+  padding-bottom: 50px;
+  border-bottom: 4px solid #E2E3D9;
 }
 
   /* BEGIN CSS Grid For Dashboard */
@@ -215,11 +230,10 @@ div.nav {
   }
 
     .wrapper .infoRecordsLeft {
-      grid-column: 1/2;
+      grid-column: 1/4;
       grid-row: 1;
       padding: 0 10px;
-      text-align: justify;
-      background-color: white;
+      text-align: center;
       color: #59554E;
     }
 
@@ -228,19 +242,53 @@ div.nav {
         text-transform: capitalize;
         padding: 0;
         margin: 20px auto;
+        text-align: center;
       }
 
-      .wrapper .infoRecordsRight p {
-        padding: 0;
-        margin: 25px auto;
+      .wrapper .infoRecordsLeft button.addRecord {
+        background-color: #E6B29B;
+        color: #59554E;
+        padding: 12px;
+        text-decoration: none;
+        cursor: pointer;
+        margin-bottom: 15px;
+        border-bottom: 3px solid #ba8e7a;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-radius: 4px;
+        font-size: 20px;
+        font-family: "Lane", Arial;
+        width: 160px;
       }
 
-    .wrapper .infoRecordsRight {
+        .mat-menu-panel {
+          background: #E6B29B;
+          border-radius: 0px;
+        }
+
+        .mat-elevation-z2 {
+          box-shadow: none;
+        }
+
+        .mat-menu-content {
+          background: #E6B29B;
+          border-bottom: 3px solid #ba8e7a;
+          width: 160px;
+          border-radius: 4px;
+        }
+
+          .mat-menu-item {
+            font-family: "Lane", Arial;
+            font-size: 20px;
+          }
+
+
+.wrapper .infoRecordsRight {
       grid-column: 2/6;
       grid-row: 1;
-      padding: 0 10px;
-      text-align: justify;
-      background-color: white;
+      padding: 10px;
+      text-align: center;
       color: #59554E;
     }
 
@@ -248,12 +296,13 @@ div.nav {
       grid-column: 1/4;
       grid-row: 2;
       padding: 0;
+      margin-top: 15px;
     }
 
       .wrapper .tableRecords table {
         border-collapse: collapse;
-        width: 100%;
-        margin: 10px;
+        width: 95%;
+        margin: 0 auto;
       }
 
         .wrapper .tableRecords table th, td {
@@ -262,7 +311,6 @@ div.nav {
         }
 
         .wrapper .tableRecords tr {
-          background: #ffffff;
           color: #59554E;
           border-bottom: 1px solid #59554E;
         }
@@ -276,19 +324,63 @@ div.nav {
           }
 
           .wrapper .tableRecords tr:hover {
-            background: #E2E3D9;
+            background: #f9fcd9;
+            cursor: pointer;
+          }
+
+          .wrapper .tableRecords tr.first:hover {
+            background: #F3F4E5;
+            cursor: default;
           }
 
         .wrapper .tableRecords th {
           color: #59554E;
           padding: 8px;
-          background: #ffffff;
           font-size: 17px;
           text-align: left;
           border-bottom: 2px solid #59554E;
+          border-top: 2px solid #59554E;
         }
 
   /* END CSS Grid for Dashboard */
+
+  /* BEGIN CSS Grid for Account */
+
+.wrapperAcct {
+  width: 100%;
+  margin: 0 auto;
+  background-color: #F3F4E5;
+  padding-bottom: 50px;
+  border-bottom: 4px solid #E2E3D9;
+}
+
+.wrapperAcct {
+  display: grid;
+  margin-top: 25px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 0;
+  grid-auto-rows: minmax(100px, auto);
+  font-size: 20px;
+}
+
+  .wrapperAcct .tags {
+    grid-column: 2;
+    grid-row: 1;
+    padding: 0;
+    text-align: left;
+    color: #59554E;
+    font-style: italic;
+    margin: 0 auto;
+  }
+
+  .wrapperAcct .information {
+    grid-column: 3;
+    color: #59554E;
+    text-align: right;
+  }
+
+  /* END CSS Grid for Account */
+
 
 /* END CSS Grid Formulation */
 
@@ -298,4 +390,61 @@ div.body {
   height: 100%;
 }
 
+/* BEGIN MODAL CSS */
+
+  .mat-dialog-container {
+    background-color: #F3F4E5;
+    border-radius: 5px;
+    font-size: 18px;
+    border-bottom: 4px solid #bebfaf;
+    box-shadow: 0 11px -10px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12);
+  }
+
+    .mat-dialog-container h1 {
+      font-family: "Lane", Arial;
+      font-size: 25px;
+      border-bottom: 1px solid #59554E;
+      padding-bottom: 3px;
+      margin-bottom: 5px;
+    }
+
+    .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+      opacity: 0.45;
+    }
+
+    .cdk-overlay-dark-backdrop {
+      background-color: #59554E;
+    }
+
+    .mat-dialog-container p {
+      border-bottom: 1px dotted #B29B82;
+      padding-bottom: 5px;
+      padding-top: 5px;
+      margin-bottom: 5px;
+      margin-top: 5px;
+    }
+
+    .mat-dialog-actions {
+      padding-bottom: 25px;
+
+    }
+
+    .mat-dialog-container button {
+      background-color: #59554E;
+      color: #F3F4E5;
+      padding: 12px;
+      text-decoration: none;
+      cursor: pointer;
+      border-bottom: 3px solid #3a3733;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-radius: 4px;
+      font-size: 20px;
+      font-family: "Lane", Arial;
+      width: autog;
+      margin: 0 auto;
+    }
+
+/* END MODAL CSS */
 
