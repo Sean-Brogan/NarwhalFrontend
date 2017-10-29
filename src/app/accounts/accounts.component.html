@@ -3,22 +3,26 @@
         <a class="logo" routerLink="/dashboard" routerLinkActive="active">The Narwhal Project</a>
       </div>
       <div class="nav">
-        <a class="nav" routerLink="/dashboard" routerLinkActive="active">Records</a>
-        <a class="nav" routerLink="/patients" routerLinkActive="active">Patients</a>
-        <a class="current" routerLink="/accounts" routerLinkActive="active">Account</a>
+        <a class="first" routerLink="/dashboard" routerLinkActive="active">Records</a>
+        <a class="current" routerLink="/accounts" routerLinkActive="active">{{currentUser.username}}</a>
         <a class="nav" [routerLink]="['/login']">Logout</a>
       </div>
 
-      <div class="wrapper">
-        <p>This is the account page where you can adjust account information.</p>
+    <div class="wrapperAcct">
+      <div class="tags">
+        <p>Full Name:</p>
+        <p>Date of Birth:</p>
+        <p>User ID:</p>
+        <p>Username:</p>
+        <p>Permission Level:</p>
       </div>
-    <div class="wrapper">
-        <p><b>User Id</b> - {{currentUser.userId}}</p>
-        <p><b>Username</b> - {{currentUser.username}}</p>
-        <p><b>First Name</b> - {{currentUser.firstname}}</p>
-        <p><b>Last Name</b> - {{currentUser.lastname}}</p>
-        <p><b>Date of Birth</b> - {{currentUser.dateOfBirth}}</p>
-        <p><b>Permission Level</b> - {{currentUser.permissionLevel}}</p>
+      <div class="information">
+        <p>{{currentUser.firstname}} {{currentUser.lastname}}</p>
+        <p>{{currentUser.dateOfBirth | date:'shortDate'}}</p>
+        <p>{{currentUser.userId}}</p>
+        <p>{{currentUser.username}}</p>
+        <p>{{currentUser.permissionLevel }}</p>
+      </div>
     </div>
     </div>
       <router-outlet></router-outlet>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { User } from '../models/user';
 import { UserService } from '../user/user.service';
+import { DatePipe } from "@angular/common";
 
 @Component({
   moduleId: module.id,

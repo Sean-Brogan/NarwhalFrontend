@@ -4,7 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JsonpModule } from '@angular/http';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DatePipe } from '@angular/common';
 
 import { User } from '../models/user';
 import { recordIndex }   from '../models/recordIndex';
@@ -34,15 +35,15 @@ export class DashboardComponent implements OnInit {
     currentSocialHistory: socialHistory;
     currentSurgery: surgery;
     permissionDoctor: boolean;
-    
+
     constructor(
     private compiler: Compiler,
       private medicalRecordsService: MedicalRecordsService,
       public dialog: MatDialog){
-        this.currentUser = JSON.parse(localStorage.getItem('currentUser')); 
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.yourRecords = JSON.parse(localStorage.getItem('yourRecordIndexes'));
       }
-      
+
 
     ngOnInit() {
         this.compiler.clearCache();
@@ -51,7 +52,7 @@ export class DashboardComponent implements OnInit {
             this.permissionDoctor = true;
         }
     }
-    
+
     addRecord(recordTypeId: number){
         if(recordTypeId == 1){
             this.addDiagnosis();
@@ -72,7 +73,7 @@ export class DashboardComponent implements OnInit {
             this.addSurgery();
         }
     }
-    
+
     addDiagnosis(){
         let newDiagnosis = new diagnosis();
         let newRecordIndex = new recordIndexDb();
@@ -82,12 +83,12 @@ export class DashboardComponent implements OnInit {
             width: '500px',
             data: {record: newDiagnosis, recordIndex: newRecordIndex}
         });
-        
+
         dialogRef.afterClosed().subscribe(result => {
             this.medicalRecordsService.addDiagnosis(result, newRecordIndex);
         });
     }
-    
+
     addImmunization(){
         let newImmunization = new immunization();
         let newRecordIndex = new recordIndexDb();
@@ -97,12 +98,12 @@ export class DashboardComponent implements OnInit {
             width: '500px',
             data: {record: newImmunization, recordIndex: newRecordIndex}
         });
-        
+
         dialogRef.afterClosed().subscribe(result => {
             this.medicalRecordsService.addImmunization(result, newRecordIndex);
         });
     }
-    
+
     addMedicalTest(){
         let newMedicalTest = new medicalTest();
         let newRecordIndex = new recordIndexDb();
@@ -112,12 +113,12 @@ export class DashboardComponent implements OnInit {
             width: '500px',
             data: {record: newMedicalTest, recordIndex: newRecordIndex}
         });
-        
+
         dialogRef.afterClosed().subscribe(result => {
             this.medicalRecordsService.addMedicalTest(result, newRecordIndex);
         });
     }
-    
+
     addMedication(){
         let newMedication = new medication();
         let newRecordIndex = new recordIndexDb();
@@ -127,12 +128,12 @@ export class DashboardComponent implements OnInit {
             width: '500px',
             data: {record: newMedication, recordIndex: newRecordIndex}
         });
-        
+
         dialogRef.afterClosed().subscribe(result => {
             this.medicalRecordsService.addMedication(result, newRecordIndex);
         });
     }
-    
+
     addSocialHistory(){
         let newSocialHistory = new socialHistory();
         let newRecordIndex = new recordIndexDb();
@@ -142,12 +143,12 @@ export class DashboardComponent implements OnInit {
             width: '500px',
             data: {record: newSocialHistory, recordIndex: newRecordIndex}
         });
-        
+
         dialogRef.afterClosed().subscribe(result => {
             this.medicalRecordsService.addSocialHistory(result, newRecordIndex);
         });
     }
-    
+
     addSurgery(){
         let newSurgery = new surgery();
         let newRecordIndex = new recordIndexDb();
@@ -157,33 +158,33 @@ export class DashboardComponent implements OnInit {
             width: '500px',
             data: {record: newSurgery, recordIndex: newRecordIndex}
         });
-        
+
         dialogRef.afterClosed().subscribe(result => {
             this.medicalRecordsService.addSurgery(result, newRecordIndex);
         });
     }
-    
+
     openRecord(recordId: number, recordTypeId: number): void {
         if(recordTypeId == 1){
             this.UpdateDiagnosis(recordId)
         }
         else if(recordTypeId == 2){
-            this.UpdateImmunization(recordId);            
+            this.UpdateImmunization(recordId);
         }
         else if(recordTypeId == 3){
-            this.UpdateMedicalTest(recordId);            
+            this.UpdateMedicalTest(recordId);
         }
         else if(recordTypeId == 4){
-            this.UpdateMedication(recordId);            
+            this.UpdateMedication(recordId);
         }
         else if(recordTypeId == 5){
-            this.UpdateSocialHistory(recordId);            
+            this.UpdateSocialHistory(recordId);
         }
         else if(recordTypeId == 6){
             this.UpdateSurgery(recordId);
         }
     }
-    
+
     UpdateDiagnosis(recordId: number){
         let promise = new Promise((resolve, reject) => {
             this.medicalRecordsService.getDiagnosis(recordId)
@@ -196,7 +197,7 @@ export class DashboardComponent implements OnInit {
         })
         return promise;
     }
-    
+
     LoadDiagnosis(){
         this.currentDiagnosis = JSON.parse(localStorage.getItem('currentRecord'));
             let dialogRef = this.dialog.open(DialogDiagnosis, {
@@ -204,7 +205,7 @@ export class DashboardComponent implements OnInit {
             data: {user: this.currentUser, record: this.currentDiagnosis}
             });
     }
-    
+
     UpdateImmunization(recordId: number){
         let promise = new Promise((resolve, reject) => {
             this.medicalRecordsService.getImmunization(recordId)
@@ -217,7 +218,7 @@ export class DashboardComponent implements OnInit {
         })
         return promise;
     }
-    
+
     LoadImmunization(){
         this.currentImmunization = JSON.parse(localStorage.getItem('currentRecord'));
             let dialogRef = this.dialog.open(DialogImmunization, {
@@ -225,7 +226,7 @@ export class DashboardComponent implements OnInit {
             data: {user: this.currentUser, record: this.currentImmunization}
             });
     }
-    
+
     UpdateMedicalTest(recordId: number){
         let promise = new Promise((resolve, reject) => {
             this.medicalRecordsService.getMedicalTest(recordId)
@@ -238,7 +239,7 @@ export class DashboardComponent implements OnInit {
         })
         return promise;
     }
-    
+
     LoadMedicalTest(){
         this.currentMedicalTest = JSON.parse(localStorage.getItem('currentRecord'));
             let dialogRef = this.dialog.open(DialogMedicalTest, {
@@ -246,7 +247,7 @@ export class DashboardComponent implements OnInit {
             data: {user: this.currentUser, record: this.currentMedicalTest}
             });
     }
-    
+
     UpdateMedication(recordId: number){
         let promise = new Promise((resolve, reject) => {
             this.medicalRecordsService.getMedication(recordId)
@@ -259,7 +260,7 @@ export class DashboardComponent implements OnInit {
         })
         return promise;
     }
-    
+
     LoadMedication(){
         this.currentMedication = JSON.parse(localStorage.getItem('currentRecord'));
             let dialogRef = this.dialog.open(DialogMedication, {
@@ -267,7 +268,7 @@ export class DashboardComponent implements OnInit {
             data: {user: this.currentUser, record: this.currentMedication}
             });
     }
-    
+
     UpdateSocialHistory(recordId: number){
         let promise = new Promise((resolve, reject) => {
             this.medicalRecordsService.getSocialHistory(recordId)
@@ -280,7 +281,7 @@ export class DashboardComponent implements OnInit {
         })
         return promise;
     }
-    
+
     LoadSocialHistory(){
         this.currentSocialHistory = JSON.parse(localStorage.getItem('currentRecord'));
             let dialogRef = this.dialog.open(DialogSocialHistory, {
@@ -288,7 +289,7 @@ export class DashboardComponent implements OnInit {
             data: {user: this.currentUser, record: this.currentSocialHistory}
             });
     }
-    
+
     UpdateSurgery(recordId: number){
         let promise = new Promise((resolve, reject) => {
             this.medicalRecordsService.getSurgery(recordId)
@@ -301,14 +302,14 @@ export class DashboardComponent implements OnInit {
         })
         return promise;
     }
-    
+
     LoadSurgery(){
         this.currentSurgery = JSON.parse(localStorage.getItem('currentRecord'));
             let dialogRef = this.dialog.open(DialogSurgery, {
             width: '500px',
             data: {user: this.currentUser, record: this.currentSurgery}
             });
-    }    
+    }
 }
 
 @Component({
@@ -320,7 +321,7 @@ export class DialogDiagnosis {
     constructor(
         public dialogRef: MatDialogRef<DialogDiagnosis>,
         @Inject(MAT_DIALOG_DATA) public data: any) { }
-        
+
         onNoClick(): void {
             this.dialogRef.close();
         }
@@ -335,7 +336,7 @@ export class DialogImmunization {
     constructor(
         public dialogRef: MatDialogRef<DialogImmunization>,
         @Inject(MAT_DIALOG_DATA) public data: any) { }
-        
+
         onNoClick(): void {
             this.dialogRef.close();
         }
@@ -350,7 +351,7 @@ export class DialogMedicalTest {
     constructor(
         public dialogRef: MatDialogRef<DialogMedicalTest>,
         @Inject(MAT_DIALOG_DATA) public data: any) { }
-        
+
         onNoClick(): void {
             this.dialogRef.close();
         }
@@ -365,7 +366,7 @@ export class DialogMedication {
     constructor(
         public dialogRef: MatDialogRef<DialogMedication>,
         @Inject(MAT_DIALOG_DATA) public data: any) { }
-        
+
         onNoClick(): void {
             this.dialogRef.close();
         }
@@ -380,7 +381,7 @@ export class DialogSocialHistory {
     constructor(
         public dialogRef: MatDialogRef<DialogSocialHistory>,
         @Inject(MAT_DIALOG_DATA) public data: any) { }
-        
+
         onNoClick(): void {
             this.dialogRef.close();
         }
@@ -395,7 +396,7 @@ export class DialogSurgery {
     constructor(
         public dialogRef: MatDialogRef<DialogSurgery>,
         @Inject(MAT_DIALOG_DATA) public data: any) { }
-        
+
         onNoClick(): void {
             this.dialogRef.close();
         }
@@ -410,7 +411,7 @@ export class DialogAddDiagnosis {
     constructor(
         public dialogRef: MatDialogRef<DialogAddDiagnosis>,
         @Inject(MAT_DIALOG_DATA) public data: any) { }
-        
+
         onNoClick(): void {
             this.dialogRef.close();
         }
@@ -425,7 +426,7 @@ export class DialogAddImmunization {
     constructor(
         public dialogRef: MatDialogRef<DialogAddDiagnosis>,
         @Inject(MAT_DIALOG_DATA) public data: any) { }
-        
+
         onNoClick(): void {
             this.dialogRef.close();
         }
@@ -440,7 +441,7 @@ export class DialogAddMedicalTest {
     constructor(
         public dialogRef: MatDialogRef<DialogAddDiagnosis>,
         @Inject(MAT_DIALOG_DATA) public data: any) { }
-        
+
         onNoClick(): void {
             this.dialogRef.close();
         }
@@ -455,7 +456,7 @@ export class DialogAddMedication {
     constructor(
         public dialogRef: MatDialogRef<DialogAddDiagnosis>,
         @Inject(MAT_DIALOG_DATA) public data: any) { }
-        
+
         onNoClick(): void {
             this.dialogRef.close();
         }
@@ -470,7 +471,7 @@ export class DialogAddSocialHistory {
     constructor(
         public dialogRef: MatDialogRef<DialogAddDiagnosis>,
         @Inject(MAT_DIALOG_DATA) public data: any) { }
-        
+
         onNoClick(): void {
             this.dialogRef.close();
         }
@@ -485,7 +486,7 @@ export class DialogAddSurgery {
     constructor(
         public dialogRef: MatDialogRef<DialogAddDiagnosis>,
         @Inject(MAT_DIALOG_DATA) public data: any) { }
-        
+
         onNoClick(): void {
             this.dialogRef.close();
         }
