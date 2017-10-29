@@ -377,6 +377,7 @@ div.nav {
     grid-column: 3;
     color: #59554E;
     text-align: right;
+    margin: 0 auto;
   }
 
   /* END CSS Grid for Account */
